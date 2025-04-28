@@ -1,1 +1,938 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acutis Tech | Soluciones de Software y Cloud</title>
+    <style>
+        :root {
+            --primary-color: #e30613; /* Rojo */
+            --secondary-color: #121212; /* Negro */
+            --light-color: #f2f2f2; /* Blanco-gris claro */
+            --dark-color: #000000; /* Negro puro */
+            --white: #ffffff;
+            --accent-color: #ff3a47; /* Rojo más brillante para acentos */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif;
+        }
+        
+        body {
+            color: var(--light-color);
+            line-height: 1.6;
+            background-color: var(--dark-color);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(227, 6, 19, 0.2);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 2px solid var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(227, 6, 19, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 120px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%), url('/api/placeholder/1200/800') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(227, 6, 19, 0.1) 0%, transparent 60%);
+            animation: rotate 30s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-text {
+            width: 50%;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-weight: 800;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--white) 0%, var(--primary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-text p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            color: var(--light-color);
+        }
+        
+        .hero-image {
+            width: 45%;
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            z-index: -1;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: var(--secondary-color);
+            position: relative;
+        }
+        
+        .features::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e30613' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.15;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+        }
+        
+        .section-title p {
+            color: #999;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background-color: var(--primary-color);
+            transition: height 0.5s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(227, 6, 19, 0.2);
+            border-color: rgba(227, 6, 19, 0.2);
+        }
+        
+        .feature-card:hover::before {
+            height: 100%;
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(227, 6, 19, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-card:hover .feature-icon {
+            background-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        
+        .feature-icon i {
+            font-size: 32px;
+            color: var(--primary-color);
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover .feature-icon i {
+            color: var(--white);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            color: var(--white);
+        }
+        
+        .feature-card p {
+            color: #999;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background-color: var(--dark-color);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .service-card {
+            display: flex;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover {
+            background-color: rgba(227, 6, 19, 0.05);
+            border-color: rgba(227, 6, 19, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .service-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+        
+        .service-content p {
+            color: #999;
+            font-size: 0.95rem;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background-color: var(--secondary-color);
+            position: relative;
+        }
+        
+        .testimonials::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e30613' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.15;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .testimonial-card:hover {
+            border-color: rgba(227, 6, 19, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 6rem;
+            color: rgba(227, 6, 19, 0.1);
+            font-family: 'Georgia', serif;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #ccc;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            background-color: #333;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--white);
+        }
+        
+        .author-position {
+            color: #999;
+            font-size: 0.85rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(227, 6, 19, 0.8) 100%), url('/api/placeholder/1200/800') center/cover no-repeat;
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 10px, transparent 10px, transparent 20px);
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .cta p {
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 80px 0 30px;
+            background-color: var(--dark-color);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--dark-color) 0%, var(--primary-color) 50%, var(--dark-color) 100%);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            color: var(--white);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            width: 50px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-column p {
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 50px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background-color: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--white);
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            color: var(--white);
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(227, 6, 19, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        /* Responsive */
+        @media screen and (max-width: 992px) {
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            
+            .features-grid, .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text, .hero-image {
+                width: 100%;
+            }
+            
+            .hero-text {
+                margin-bottom: 50px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .testimonials-grid, .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Acutis <span>Tech</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#soluciones">Soluciones</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+            <a href="#contacto" class="btn">Contáctanos</a>
+        </div>
+    </header>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Soluciones tecnológicas de alto impacto</h1>
+                <p>En Acutis Tech desarrollamos software a medida, implementaciones en Google Workspace, soluciones escalables en AWS Cloud y ofrecemos evaluaciones de Ciberseguridad Multi-Cloud para llevar tu empresa al siguiente nivel.</p>
+                <a href="#servicios" class="btn">Descubrir Soluciones</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://github.com/nicolasfrini98/acutissite/blob/main/ACUTIS_TECH-removebg-preview.png?raw=true" alt="Soluciones tecnológicas Acutis Tech">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="servicios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Servicios</h2>
+                <p>Ofrecemos soluciones tecnológicas de vanguardia adaptadas a las necesidades específicas de tu negocio.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i>⚙️</i>
+                    </div>
+                    <h3>Software a Medida</h3>
+                    <p>Desarrollamos soluciones de software personalizadas que resuelven los desafíos únicos de tu empresa, optimizando procesos y potenciando tu productividad con tecnologías de última generación.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i>🔄</i>
+                    </div>
+                    <h3>Google Workspace</h3>
+                    <p>Implementamos y optimizamos Google Workspace para tu organización, mejorando la colaboración, la comunicación y la productividad de tus equipos con herramientas cloud de clase mundial.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i>☁️</i>
+                    </div>
+                    <h3>AWS Cloud</h3>
+                    <p>Diseñamos e implementamos arquitecturas escalables en AWS, maximizando el rendimiento y optimizando costos para que tu infraestructura crezca al ritmo de tu negocio sin interrupciones.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i>🔒</i>
+                    </div>
+                    <h3>Ciberseguridad Multi-Cloud</h3>
+                    <p>Evaluamos y fortificamos tus sistemas en entornos multi-cloud, identificando vulnerabilidades y desarrollando estrategias de protección integrales para mantener tu información segura.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="soluciones">
+        <div class="container">
+            <div class="section-title">
+                <h2>Soluciones Especializadas</h2>
+                <p>Descubre cómo nuestras soluciones tecnológicas pueden transformar tu negocio.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <div class="service-content">
+                        <h3>Automatización de Procesos</h3>
+                        <p>Optimizamos tus flujos de trabajo mediante la automatización inteligente, reduciendo tiempos operativos y minimizando errores humanos.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <div class="service-content">
+                        <h3>Inteligencia de Negocio</h3>
+                        <p>Transformamos tus datos en insights accionables mediante dashboards personalizados y herramientas analíticas avanzadas.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <div class="service-content">
+                        <h3>Auditorías de Seguridad</h3>
+                        <p>Evaluamos exhaustivamente tu infraestructura para identificar vulnerabilidades y fortalecer tus defensas contra amenazas cibernéticas.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <div class="service-content">
+                        <h3>Transformación Digital</h3>
+                        <p>Acompañamos a tu empresa en el proceso de transformación digital, implementando tecnologías disruptivas para mantenerte competitivo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Lo que dicen nuestros clientes</h2>
+                <p>Empresas que han confiado en nuestras soluciones tecnológicas y han transformado su operación.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Acutis Tech transformó nuestra infraestructura cloud en AWS, logrando una reducción del 40% en costos operativos y mejorando significativamente el rendimiento de nuestras aplicaciones. Su equipo demostró un profundo conocimiento técnico y compromiso con nuestros objetivos."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image"></div>
+                        <div>
+                            <div class="author-name">Carlos Méndez</div>
+                            <div class="author-position">CTO, Fintech Solutions</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+    <div class="testimonial-text">
+        "La implementación de Google Workspace realizada por Acutis Tech mejoró drásticamente la colaboración..."
+    </div>
+    <div class="testimonial-author">
+        <div class="author-image"></div>
+        <div>
+            <div class="author-name">Ana Rodríguez</div>
+            <div class="author-position">Directora, GlobalTeams</div>
+        </div>
+    </div>
+</div>
+
+        </section>
+    
+        <!-- Contact Section -->
+        <section class="features" id="contacto">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Contáctanos</h2>
+                    <p>¿Tienes un proyecto en mente o quieres saber más? ¡Hablemos!</p>
+                </div>
+                <div class="contact-form">
+                    <form action="https://formspree.io/f/your-form-id" method="POST">
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-block">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Footer -->
+        <footer>
+            <div class="container footer-content">
+                <div class="footer-column">
+                    <h3>Acutis Tech</h3>
+                    <p>Soluciones en software, cloud y ciberseguridad diseñadas para impulsar el éxito de tu negocio.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">🌐</a>
+                        <a href="#" class="social-link">📧</a>
+                        <a href="#" class="social-link">🔗</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Servicios</h3>
+                    <ul>
+                        <li><a href="#servicios">Software a Medida</a></li>
+                        <li><a href="#servicios">Google Workspace</a></li>
+                        <li><a href="#servicios">AWS Cloud</a></li>
+                        <li><a href="#servicios">Ciberseguridad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Soluciones</h3>
+                    <ul>
+                        <li><a href="#soluciones">Automatización</a></li>
+                        <li><a href="#soluciones">Inteligencia de Negocio</a></li>
+                        <li><a href="#soluciones">Auditorías de Seguridad</a></li>
+                        <li><a href="#soluciones">Transformación Digital</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><a href="#contacto">Formulario</a></li>
+                        <li><a href="mailto:contacto@acutistech.com">Email</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Acutis Tech. Todos los derechos reservados.
+            </div>
+        </footer>
+    
+    </body>
+    </html>
+         
